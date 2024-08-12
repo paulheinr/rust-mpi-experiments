@@ -30,7 +30,7 @@ fn no_comm(id: &String, world: &SimpleCommunicator) {
 }
 
 fn ping_pong(id: &String, world: &SimpleCommunicator) {
-    let mut received = 0u8;
+    let mut received = 0i32;
     mpi::request::scope(|scope| {
         world.process_at_rank(0).receive_into(&mut received);
         println!("[Client {}, rank {}] Received message from Server: {}", id, world.rank(), received);

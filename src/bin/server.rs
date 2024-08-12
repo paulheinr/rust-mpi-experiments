@@ -24,7 +24,7 @@ fn ping_pong(world: &SimpleCommunicator) {
     let rank = world.rank();
 
     assert_eq!(rank, 0);
-    let message = 0u8;
+    let message = -1i32;
     mpi::request::multiple_scope((world.size() as usize)*2, |scope, reqs| {
         for i in 1..size {
             let req = world.process_at_rank(i).immediate_send(scope, &message);
@@ -33,7 +33,7 @@ fn ping_pong(world: &SimpleCommunicator) {
         }
 
         for i in 1..size {
-            let mut received = 0u8;
+            let mut received = 0i32;
             world.process_at_rank(i).receive_into(&mut received);
             println!("[Server] Received message from process {}: {}", i, received);
         }

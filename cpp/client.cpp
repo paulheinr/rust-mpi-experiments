@@ -18,11 +18,11 @@ void ping_pong(const std::string& id) {
     // Client process
     int received;
     MPI_Status status;
-    MPI_Recv(&received, 1, MPI_UINT8_T, 0, 0, comm, &status);
+    MPI_Recv(&received, 1, MPI_INT32_T, 0, 0, comm, &status);
     std::cout << "[Client " << id << " " << rank << "] Received message from server: " << received << std::endl;
     
     // Send message back to server
-    MPI_Send(&received, 1, MPI_UINT8_T, 0, 0, comm);
+    MPI_Send(&received, 1, MPI_INT32_T, 0, 0, comm);
     std::cout << "[Client " << id << " " << rank << "] Sent message back to server" << std::endl;
 }
 
